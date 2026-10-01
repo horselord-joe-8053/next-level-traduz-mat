@@ -23,6 +23,17 @@
 - Testing private helpers instead of public behavior.
 - Live LLM calls in CI.
 
+## UI polish and tickets
+
+Visual polish is harness-owned, not a separate product. See `docs/specs/ui-factory-convention.md`.
+
+When using **`/to-tickets`**, either:
+
+- include UI layout + a11y in each tracer-bullet that changes `frontend/src/**`, or
+- add a **UI polish** ticket **blocked by** functional UI tickets.
+
+Tests stay at **behavior** seams (roles, labels, enabled/disabled); do not gate merge on screenshot diff unless a future spec adds that.
+
 ## Matt `/tdd` skill
 
 When using [mattpocock/skills `/tdd`](https://github.com/mattpocock/skills/blob/main/skills/engineering/tdd/SKILL.md), this file is the Traduz-specific seam reference; the skill is the procedure.

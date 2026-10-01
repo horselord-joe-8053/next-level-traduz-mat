@@ -8,6 +8,7 @@ Traduz Mat is a small Brazilian Portuguese → English translation web app (`fro
 - Architecture: `docs/ARCHITECTURE.md`
 - Security/privacy: `docs/SECURITY.md`
 - TDD policy: `docs/TRADUZ-TDD.md`
+- UI factory (when specs touch the web UI): `docs/specs/ui-factory-convention.md`
 - Artifact templates: `docs/templates/`
 - Approved feature specs: `docs/specs/`
 - Durable plans: `docs/plans/`
@@ -20,9 +21,10 @@ For a non-trivial feature or behavior change:
 
 Proceed autonomously unless human judgment is required.
 
-- **SPEC:** use the `specify-feature` skill (or Matt `/grill-with-docs` + `/to-spec` when configured).
+- **SPEC:** use the `specify-feature` skill (or Matt `/grill-with-docs` + `/to-spec` when configured). User-visible features include **UI & layout** and **a11y** sections per `docs/templates/feature-spec.md`.
 - **PLAN:** inspect the repository; persist a plan under `docs/plans/` only when complexity warrants it.
-- **IMPLEMENT:** use the `implement-feature` skill (strict TDD per `docs/TRADUZ-TDD.md`).
+- **TICKETS (Matt):** `/to-tickets` may add a **UI polish** slice blocked by functional UI tickets, or fold UI+a11y into each vertical slice that touches `frontend/src/**` (see `docs/specs/ui-factory-convention.md`).
+- **IMPLEMENT:** use the `implement-feature` skill (strict TDD per `docs/TRADUZ-TDD.md`). If the change touches **`frontend/src/**`**, apply **ui-ux-pro-max** (`.agents/skills/ui-ux-pro-max/SKILL.md`) or read **`design-system/*/MASTER.md`** when it exists; do not change product behavior unless the approved spec says so.
 - **VERIFY:** run `./scripts/verify.sh`; do not treat the change as ready while it fails. Do not require `./scripts/dev.sh` for VERIFY.
 - **EVALUATE:** independently compare the result with the approved spec (evaluator subagent or `/code-review` when valuable).
 - **COMPLETE:** only after required verification and evaluation pass.
@@ -55,3 +57,5 @@ Project skills live under `.agents/skills/`:
 - **Matt Pocock (Matt track):** `tdd`, `grill-with-docs`, `to-spec`, `to-tickets`, `implement`, `implement-spec`, `code-review`, `setup-matt-pocock-skills`, etc.
 
 Install Matt skills **in this repo** (`cd projects/traduz_mat && npx skills add mattpocock/skills`). Run **`/setup-matt-pocock-skills`** once before relying on GitHub issue integration.
+
+- **UI/UX Pro Max:** `ui-ux-pro-max` (+ related `ui-styling`, `design-system`) under `.agents/skills/`. Installed via `uipro init --ai universal`. Use for visual polish and a11y checklists; still run **`/tdd`** and **`./scripts/verify.sh`** for behavior.
