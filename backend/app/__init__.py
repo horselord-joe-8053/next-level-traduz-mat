@@ -1,0 +1,1 @@
+"""Traduz Mat FastAPI application."""
